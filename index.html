@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>Kafka Messages</title>
+  </head>
+  <body>
+    <h1>Kafka Messages</h1>
+    <ul id="messages">
+      <li>$6.79</li>
+    </ul>
+  </body>
+  <script>
+    var ws = new WebSocket("ws://localhost:3000");
+    const socket = io();
+    socket.on("message", (message) => {
+      console.log(message);
+    });
+    ws.onmessage = function (event) {
+      var messages = document.getElementById("messages");
+      var message = document.createElement("li");
+      message.innerHTML = event.data;
+      messages.appendChild(message);
+    };
+  </script>
+</html>

@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <title>Kafka Messages</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  </head>
+  <body>
+    <h1>Kafka Messages</h1>
+    <% messages.forEach(function(message) { %> <%= message %> <% }); %>
+    <canvas id="myChart" width="400" height="400"></canvas>
+  </body>
+  <script>
+    const ctx = document.getElementById("myChart").getContext("2d");
+    const labels = [];
+    for (let i = 1; i <= 1000; i++) {
+      labels.push(i);
+    }
+    console.log(`<%= messages %>`);
+    const chart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            data: `<%= messages %>`,
+            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            spanGaps: true,
+          },
+        ],
+      },
+      options: {
+        plugins: {
+          datalabels: {
+            display: function (context) {
+              return context.dataset.data[context.dataIndex] !== 0; // or >= 1 or ...
+            },
+          },
+        },
+      },
+      spanGaps: true,
+    });
+  </script>
+</html>
