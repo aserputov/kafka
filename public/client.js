@@ -106,5 +106,19 @@ function sendAlert(buttonName) {
     localStorage.setItem("history", JSON.stringify(list));
   } else {
     window.alert(`You sold 1 stock at ${globalPrice}!`);
+    newObject = {
+      id: 1,
+      operator: "Sold",
+      name: "Kafka",
+      quantity: 1,
+      price: globalPrice,
+    };
+    list.push(newObject);
+    console.log(newObject);
+    const ul = document.getElementById("list"); // Select the ul element
+    const li = document.createElement("li"); // Create a new li element
+    li.innerText = `You ${newObject.operator} ${newObject.name} socks: of ${newObject.quantity} at ${newObject.price}`; // Set the text content of the li element
+    ul.appendChild(li);
+    localStorage.setItem("history", JSON.stringify(list));
   }
 }
