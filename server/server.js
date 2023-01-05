@@ -22,6 +22,10 @@ class Producer {
       random = random;
     }
     price = price + random;
+
+    if (price < 1) {
+      price = 15;
+    }
     const message = `${price.toFixed(2)}`;
     const payloads = [{ topic: "events", messages: message }];
 
